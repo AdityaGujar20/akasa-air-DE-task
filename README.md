@@ -55,8 +55,8 @@
    A simple page at `/ui`:
 
    * Upload sections (customers, orders)
-   * Buttons: **Clean Data**, **Load to DB**
-   * KPI cards and charts (bar, line, etc.)
+   * Buttons: **Run Cleaning Pipeline**, **Load to MySQL**
+   * KPI tables and charts (bar, line, etc.)
    * After each step, the KPI section refreshes.
 
 ---

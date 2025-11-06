@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>KPI Dashboard • Data Pipeline Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    * {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .animate-slide-in { animation: slideIn 0.5s ease-out forwards; }
+    .animate-pulse-slow { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    
+    .upload-zone {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .upload-zone:hover {
+      border-color: #3b82f6;
+      background: rgba(59, 130, 246, 0.03);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .btn-primary {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    }
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .section-card {
+      background: white;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .section-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+    .chart-container {
+      background: white;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      transition: all 0.3s ease;
+    }
+    .chart-container:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm backdrop-blur-sm bg-white/95">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-11 h-11 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center shadow-lg">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-2xl font-bold text-slate-900 tracking-tight">KPI Dashboard</h1>
+            <p class="text-sm text-slate-600 font-medium">Data Pipeline Dashboard</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-8">
+    
+    <!-- Pipeline Progress Steps -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl flex items-center justify-center text-lg font-bold shadow-md flex-shrink-0">
+            1
+          </div>
+          <div>
+            <p class="font-semibold text-slate-900">Upload</p>
+            <p class="text-xs text-slate-500">Import data files</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 text-white rounded-xl flex items-center justify-center text-lg font-bold shadow-md flex-shrink-0">
+            2
+          </div>
+          <div>
+            <p class="font-semibold text-slate-900">Clean</p>
+            <p class="text-xs text-slate-500">Validate & transform</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-xl flex items-center justify-center text-lg font-bold shadow-md flex-shrink-0">
+            3
+          </div>
+          <div>
+            <p class="font-semibold text-slate-900">Load</p>
+            <p class="text-xs text-slate-500">Persist to database</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 text-white rounded-xl flex items-center justify-center text-lg font-bold shadow-md flex-shrink-0">
+            4
+          </div>
+          <div>
+            <p class="font-semibold text-slate-900">Analyze</p>
+            <p class="text-xs text-slate-500">Generate insights</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload Section -->
+    <section id="section-upload" class="section-card rounded-xl shadow-sm border border-slate-200 p-8 mb-6 animate-slide-in">
+      <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+        <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+          </svg>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">Upload Data Files</h2>
+          <p class="text-sm text-slate-600">Upload your daily customer and order files</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="upload-zone border-2 border-dashed border-slate-300 rounded-xl p-8 text-center cursor-pointer bg-slate-50">
+          <svg class="w-14 h-14 mx-auto mb-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          <h3 class="font-semibold text-slate-800 mb-3 text-base">Customers CSV</h3>
+          <input id="customersFile" type="file" accept=".csv" class="hidden" />
+          <label for="customersFile" class="inline-block px-6 py-2.5 bg-slate-900 text-white rounded-lg text-sm font-medium cursor-pointer hover:bg-slate-800 transition shadow-sm">
+            Choose File
+          </label>
+          <p id="customersFileName" class="text-xs text-slate-500 mt-3 font-medium">No file selected</p>
+        </div>
+
+        <div class="upload-zone border-2 border-dashed border-slate-300 rounded-xl p-8 text-center cursor-pointer bg-slate-50">
+          <svg class="w-14 h-14 mx-auto mb-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+          </svg>
+          <h3 class="font-semibold text-slate-800 mb-3 text-base">Orders XML</h3>
+          <input id="ordersFile" type="file" accept=".xml" class="hidden" />
+          <label for="ordersFile" class="inline-block px-6 py-2.5 bg-slate-900 text-white rounded-lg text-sm font-medium cursor-pointer hover:bg-slate-800 transition shadow-sm">
+            Choose File
+          </label>
+          <p id="ordersFileName" class="text-xs text-slate-500 mt-3 font-medium">No file selected</p>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <button id="btnUpload" class="btn-primary bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-8 py-3 rounded-lg text-white font-semibold shadow-md">
+          <span class="flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+            </svg>
+            Upload Files
+          </span>
+        </button>
+      </div>
+
+      <div id="statusUpload" class="mt-6 text-center"></div>
+    </section>
+
+    <!-- Clean Section -->
+    <section id="section-clean" class="section-card rounded-xl shadow-sm border border-slate-200 p-8 mb-6 animate-slide-in" style="animation-delay: 0.1s">
+      <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+        <div class="w-11 h-11 bg-amber-50 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          </svg>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">Data Cleaning Pipeline</h2>
+          <p class="text-sm text-slate-600">Validate, transform, and prepare data</p>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <button id="btnClean" class="btn-primary bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 px-8 py-3 rounded-lg text-white font-semibold shadow-md">
+          <span class="flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+            Run Cleaning Pipeline
+          </span>
+        </button>
+      </div>
+
+      <div id="statusClean" class="mt-6 text-center"></div>
+    </section>
+
+    <!-- Load Section -->
+    <section id="section-load" class="section-card rounded-xl shadow-sm border border-slate-200 p-8 mb-6 animate-slide-in" style="animation-delay: 0.2s">
+      <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+        <div class="w-11 h-11 bg-emerald-50 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/>
+          </svg>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">Load Into Database</h2>
+          <p class="text-sm text-slate-600">Persist cleaned data to MySQL</p>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <button id="btnLoad" class="btn-primary bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 px-8 py-3 rounded-lg text-white font-semibold shadow-md">
+          <span class="flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
+            </svg>
+            Load to MySQL
+          </span>
+        </button>
+      </div>
+
+      <div id="statusLoad" class="mt-6 text-center"></div>
+    </section>
+
+    <!-- KPI Dashboard -->
+    <section id="section-kpi" class="section-card rounded-xl shadow-sm border border-slate-200 p-8 animate-slide-in" style="animation-delay: 0.3s">
+      <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100 flex-wrap gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 bg-indigo-50 rounded-xl flex items-center justify-center">
+            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">Analytics Dashboard</h2>
+            <p class="text-sm text-slate-600">Real-time business intelligence</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 bg-slate-50 rounded-lg px-4 py-2.5 border border-slate-200 shadow-sm">
+          <label class="text-sm font-semibold text-slate-700">Data Source:</label>
+          <select id="sourceMode" class="text-sm font-medium border-0 focus:ring-2 focus:ring-indigo-500 bg-transparent text-slate-800 cursor-pointer rounded px-2 py-1">
+            <option value="memory">In-Memory</option>
+            <option value="db">MySQL Database</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-gradient-to-br from-slate-50 to-blue-50/30 rounded-xl p-6 border border-slate-200 shadow-sm">
+          <h3 class="text-base font-semibold text-slate-800 mb-4 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 bg-blue-500 rounded-full shadow-sm"></span>
+            Repeat Customers
+          </h3>
+          <div id="repeatCustomersTable" class="overflow-auto max-h-64 bg-white rounded-lg border border-slate-200">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-50 sticky top-0 border-b border-slate-200">
+                <tr>
+                  <th class="text-left p-3 font-semibold text-slate-700">Customer ID</th>
+                  <th class="text-right p-3 font-semibold text-slate-700">Order Count</th>
+                </tr>
+              </thead>
+              <tbody id="repeatTableBody">
+                <tr>
+                  <td colspan="2" class="text-center p-4 text-slate-500">Loading...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-slate-50 to-emerald-50/30 rounded-xl p-6 border border-slate-200 shadow-sm">
+          <h3 class="text-base font-semibold text-slate-800 mb-4 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full shadow-sm"></span>
+            Monthly Order Trends
+          </h3>
+          <div class="h-64 chart-container">
+            <canvas id="chartMonthly"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-slate-50 to-purple-50/30 rounded-xl p-6 border border-slate-200 shadow-sm">
+          <h3 class="text-base font-semibold text-slate-800 mb-4 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 bg-purple-500 rounded-full shadow-sm"></span>
+            Regional Revenue
+          </h3>
+          <div class="h-64 chart-container">
+            <canvas id="chartRegional"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-slate-50 to-amber-50/30 rounded-xl p-6 border border-slate-200 shadow-sm">
+          <h3 class="text-base font-semibold text-slate-800 mb-4 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 bg-amber-500 rounded-full shadow-sm"></span>
+            Top Customers (Last 30 Days)
+          </h3>
+          <div class="h-64 chart-container">
+            <canvas id="chartTop"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div id="statusKpi" class="mt-6 text-center"></div>
+    </section>
+
+  </main>
+
+  <script>
+    // File name display
+    document.getElementById('customersFile').addEventListener('change', function(e) {
+      const fileName = e.target.files[0]?.name || 'No file selected';
+      document.getElementById('customersFileName').textContent = fileName;
+    });
+
+    document.getElementById('ordersFile').addEventListener('change', function(e) {
+      const fileName = e.target.files[0]?.name || 'No file selected';
+      document.getElementById('ordersFileName').textContent = fileName;
+    });
+
+    // Smooth scroll helper
+    function scrollToEl(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    // Status message helper
+    function setStatus(id, msg, ok = true) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = msg ? `
+        <div class="inline-flex items-center gap-3 px-5 py-3 rounded-lg ${ok ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm' : 'bg-rose-50 text-rose-700 border border-rose-200 shadow-sm'}">
+          <span class="w-2 h-2 rounded-full ${ok ? 'bg-emerald-500 animate-pulse-slow' : 'bg-rose-500'}"></span>
+          <span class="font-semibold text-sm">${msg}</span>
+        </div>
+      ` : '';
+    }
+
+    // Chart instances
+    let charts = {
+      monthly: null,
+      regional: null,
+      top: null
+    };
+
+    // Get KPI endpoint base
+    function baseKpi() {
+      const mode = document.getElementById("sourceMode").value;
+      return mode === "db" ? "/kpi/db" : "/kpi/memory";
+    }
+
+    // Render repeat customers table
+    function renderRepeatTable(repeat) {
+      const tbody = document.getElementById('repeatTableBody');
+      if (!repeat || repeat.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="2" class="text-center p-4 text-slate-500 font-medium">No repeat customers found</td></tr>';
+        return;
+      }
+      
+      tbody.innerHTML = repeat.map((r, index) => `
+        <tr class="border-t border-slate-100 hover:bg-slate-50 transition">
+          <td class="p-3 text-slate-700 font-medium">${r.customer_id}</td>
+          <td class="p-3 text-right">
+            <span class="inline-flex items-center justify-center px-2.5 py-1 bg-blue-100 text-blue-700 rounded-lg text-xs font-semibold">
+              ${r.order_count}
+            </span>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Region color mapping for consistency
+    const regionColors = {
+      'North': '#6366f1',
+      'South': '#ec4899',
+      'East': '#8b5cf6',
+      'West': '#f59e0b',
+      'Central': '#10b981',
+      'Northeast': '#3b82f6',
+      'Unknown': '#94a3b8'
+    };
+
+    // Render all charts
+    function renderCharts({ repeat, monthly, regional, top }) {
+      // Render repeat customers as table
+      renderRepeatTable(repeat);
+
+      // Destroy existing charts
+      Object.keys(charts).forEach(k => {
+        if (charts[k]) {
+          charts[k].destroy();
+          charts[k] = null;
+        }
+      });
+
+      Chart.defaults.font.family = "system-ui, -apple-system, 'Segoe UI', sans-serif";
+      Chart.defaults.color = '#475569';
+
+      charts.monthly = new Chart(document.getElementById("chartMonthly"), {
+        type: "line",
+        data: {
+          labels: monthly.map(m => m.month),
+          datasets: [{
+            label: "Orders",
+            data: monthly.map(m => m.orders_count || m.orders || 0),
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16, 185, 129, 0.08)',
+            tension: 0.4,
+            fill: true,
+            borderWidth: 3,
+            pointRadius: 4,
+            pointBackgroundColor: '#10b981',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { 
+            legend: { display: false },
+            tooltip: { 
+              backgroundColor: '#1e293b',
+              padding: 12,
+              cornerRadius: 8
+            }
+          },
+          scales: {
+            y: { 
+              beginAtZero: true, 
+              grid: { color: '#f1f5f9' },
+              ticks: { font: { size: 11 } }
+            },
+            x: { 
+              grid: { display: false },
+              ticks: { font: { size: 11 } }
+            }
+          }
+        }
+      });
+
+      charts.regional = new Chart(document.getElementById("chartRegional"), {
+        type: "doughnut",
+        data: {
+          labels: regional.map(r => r.region || "Unknown"),
+          datasets: [{
+            data: regional.map(r => r.revenue || 0),
+            backgroundColor: regional.map(r => regionColors[r.region] || regionColors['Unknown']),
+            borderWidth: 3,
+            borderColor: '#fff'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { 
+              position: 'bottom',
+              labels: {
+                padding: 15,
+                font: { size: 11 },
+                usePointStyle: true,
+                pointStyle: 'circle'
+              }
+            },
+            tooltip: { 
+              backgroundColor: '#1e293b',
+              padding: 12,
+              cornerRadius: 8
+            }
+          }
+        }
+      });
+
+      charts.top = new Chart(document.getElementById("chartTop"), {
+        type: "bar",
+        data: {
+          labels: top.map(t => t.customer_id),
+          datasets: [{
+            label: "Total Spend",
+            data: top.map(t => t.total_spend || t.total_amount || 0),
+            backgroundColor: '#f59e0b',
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          indexAxis: "y",
+          plugins: { 
+            legend: { display: false },
+            tooltip: { 
+              backgroundColor: '#1e293b',
+              padding: 12,
+              cornerRadius: 8
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              grid: { color: '#f1f5f9' },
+              ticks: { font: { size: 11 } },
+              title: {
+                display: true,
+                text: 'Total Spend (₹)',
+                font: {
+                  size: 12,
+                  weight: '600'
+                },
+                color: '#475569'
+              }
+            },
+            y: { 
+              grid: { display: false },
+              ticks: { font: { size: 11 } }
+            }
+          }
+        }
+      });
+    }
+
+    // Fetch and refresh KPIs
+    async function refreshKpis() {
+      const base = baseKpi();
+      try {
+        const [repeat, monthly, regional, top] = await Promise.all([
+          fetch(`${base}/repeat-customers`).then(r => r.json()),
+          fetch(`${base}/monthly-order-trends`).then(r => r.json()),
+          fetch(`${base}/regional-revenue`).then(r => r.json()),
+          fetch(`${base}/top-customers?limit=10`).then(r => r.json())
+        ]);
+
+        renderCharts({ repeat, monthly, regional, top });
+        setStatus("statusKpi", "Dashboard refreshed successfully", true);
+      } catch (err) {
+        console.error(err);
+        setStatus("statusKpi", "Failed to load analytics data", false);
+      }
+    }
+
+    // Upload files
+    async function uploadFiles() {
+      const cust = document.getElementById("customersFile").files[0];
+      const orders = document.getElementById("ordersFile").files[0];
+
+      if (!cust && !orders) {
+        setStatus("statusUpload", "Please select at least one file to upload", false);
+        return;
+      }
+
+      setStatus("statusUpload", "Uploading files...", true);
+
+      try {
+        if (cust) {
+          const fd = new FormData();
+          fd.append("file", cust);
+          await fetch("/upload/customers", { method: "POST", body: fd }).then(r => r.json());
+        }
+        if (orders) {
+          const fd = new FormData();
+          fd.append("file", orders);
+          await fetch("/upload/orders", { method: "POST", body: fd }).then(r => r.json());
+        }
+
+        setStatus("statusUpload", "Files uploaded successfully!", true);
+        setTimeout(() => scrollToEl("section-clean"), 500);
+      } catch (err) {
+        console.error(err);
+        setStatus("statusUpload", "Upload failed. Please try again.", false);
+      }
+    }
+
+    // Run cleaning
+    async function runClean() {
+      setStatus("statusClean", "Running data cleaning pipeline...", true);
+      try {
+        const res = await fetch("/clean", { method: "POST" }).then(r => r.json());
+        setStatus("statusClean", "Data cleaned successfully!", true);
+        setTimeout(() => scrollToEl("section-load"), 500);
+        await refreshKpis();
+      } catch (err) {
+        console.error(err);
+        setStatus("statusClean", "Cleaning failed. Check your data.", false);
+      }
+    }
+
+    // Load to database
+    async function runLoad() {
+      setStatus("statusLoad", "Loading data into MySQL...", true);
+      try {
+        const res = await fetch("/db/load", { method: "POST" }).then(r => r.json());
+        setStatus("statusLoad", "Data loaded to database successfully!", true);
+        setTimeout(() => scrollToEl("section-kpi"), 500);
+        await refreshKpis();
+      } catch (err) {
+        console.error(err);
+        setStatus("statusLoad", "Database load failed.", false);
+      }
+    }
+
+    // Event listeners
+    document.getElementById("btnUpload").addEventListener("click", uploadFiles);
+    document.getElementById("btnClean").addEventListener("click", runClean);
+    document.getElementById("btnLoad").addEventListener("click", runLoad);
+    document.getElementById("sourceMode").addEventListener("change", refreshKpis);
+
+    // Initial load
+    refreshKpis();
+  </script>
+</body>
+</html>

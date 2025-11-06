@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+loguru
+pandas
+sqlalchemy
+pymysql
+python-dotenv
+jinja2
+lxml
+python-multipart
+cryptography

@@ -1,0 +1,21 @@
+customer_id,customer_name,mobile_number,region
+CUST-001,Aarav Mehta,9123456781,West
+CUST-002,Diya Sharma,9123456782,North
+CUST-003,Krish Patel,9123456783,South
+CUST-004,Ananya Singh,9123456784,East
+CUST-005,Rohan Verma,9123456785,West
+CUST-006,Isha Nair,9123456786,South
+CUST-007,Arjun Gupta,9123456787,North
+CUST-008,Saanvi Rao,9123456788,East
+CUST-009,Mihir Kulkarni,9123456789,West
+CUST-010,Advika Deshmukh,9123456790,South
+CUST-011,Reyansh Shah,9123456791,North
+CUST-012,Priyanka Joshi,9123456792,East
+CUST-013,Atharv Pandey,9123456793,West
+CUST-014,Myra Kapoor,9123456794,North
+CUST-015,Kabir Goyal,9123456795,South
+CUST-016,Trisha Iyer,9123456796,East
+CUST-017,Vihaan Malhotra,9123456797,West
+CUST-018,Ritika Reddy,9123456798,South
+CUST-019,Ayaan Dutta,9123456799,North
+CUST-020,Meera Kulkarni,9123456700,East

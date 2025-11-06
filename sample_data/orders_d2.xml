@@ -1,0 +1,193 @@
+<orders>
+  <!-- Customer CUST-001 -->
+  <order>
+    <order_id>ORD-2025-0001</order_id>
+    <mobile_number>9123456781</mobile_number>
+    <order_date_time>2025-10-12T09:15:32</order_date_time>
+    <sku_id>SKU-1001</sku_id>
+    <sku_count>2</sku_count>
+    <total_amount>7450</total_amount>
+  </order>
+  <order>
+    <order_id>ORD-2025-0001</order_id>
+    <mobile_number>9123456781</mobile_number>
+    <order_date_time>2025-10-12T09:15:32</order_date_time>
+    <sku_id>SKU-1004</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>7450</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-2025-0002</order_id>
+    <mobile_number>9123456781</mobile_number>
+    <order_date_time>2025-11-01T14:22:10</order_date_time>
+    <sku_id>SKU-1007</sku_id>
+    <sku_count>2</sku_count>
+    <total_amount>5299</total_amount>
+  </order>
+
+  <!-- Customer CUST-002 -->
+  <order>
+    <order_id>ORD-2025-0003</order_id>
+    <mobile_number>9123456782</mobile_number>
+    <order_date_time>2025-09-30T18:45:55</order_date_time>
+    <sku_id>SKU-1003</sku_id>
+    <sku_count>4</sku_count>
+    <total_amount>8930</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-2025-0004</order_id>
+    <mobile_number>9123456782</mobile_number>
+    <order_date_time>2025-11-02T12:21:14</order_date_time>
+    <sku_id>SKU-1010</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>4499</total_amount>
+  </order>
+
+
+  <!-- Customer CUST-003 -->
+  <order>
+    <order_id>ORD-2025-0005</order_id>
+    <mobile_number>9123456783</mobile_number>
+    <order_date_time>2025-09-10T11:11:11</order_date_time>
+    <sku_id>SKU-1002</sku_id>
+    <sku_count>3</sku_count>
+    <total_amount>6990</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-2025-0006</order_id>
+    <mobile_number>9123456783</mobile_number>
+    <order_date_time>2025-10-20T16:32:08</order_date_time>
+    <sku_id>SKU-1005</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>3999</total_amount>
+  </order>
+
+
+  <!-- Customer CUST-004 -->
+  <order>
+    <order_id>ORD-2025-0007</order_id>
+    <mobile_number>9123456784</mobile_number>
+    <order_date_time>2025-11-03T10:01:44</order_date_time>
+    <sku_id>SKU-1012</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>5200</total_amount>
+  </order>
+
+
+  <!-- Customer CUST-005 -->
+  <order>
+    <order_id>ORD-2025-0008</order_id>
+    <mobile_number>9123456785</mobile_number>
+    <order_date_time>2025-08-15T09:32:01</order_date_time>
+    <sku_id>SKU-1011</sku_id>
+    <sku_count>2</sku_count>
+    <total_amount>6100</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-2025-0009</order_id>
+    <mobile_number>9123456785</mobile_number>
+    <order_date_time>2025-10-10T19:12:56</order_date_time>
+    <sku_id>SKU-1013</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>3300</total_amount>
+  </order>
+
+
+  <!-- Customer CUST-006 -->
+  <order>
+    <order_id>ORD-2025-0010</order_id>
+    <mobile_number>9123456786</mobile_number>
+    <order_date_time>2025-09-01T13:22:48</order_date_time>
+    <sku_id>SKU-1007</sku_id>
+    <sku_count>3</sku_count>
+    <total_amount>8900</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-2025-0011</order_id>
+    <mobile_number>9123456786</mobile_number>
+    <order_date_time>2025-11-03T15:45:11</order_date_time>
+    <sku_id>SKU-1001</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>2800</total_amount>
+  </order>
+
+
+  <!-- Customer CUST-007 -->
+  <order>
+    <order_id>ORD-2025-0012</order_id>
+    <mobile_number>9123456787</mobile_number>
+    <order_date_time>2025-10-05T08:55:30</order_date_time>
+    <sku_id>SKU-1014</sku_id>
+    <sku_count>2</sku_count>
+    <total_amount>7200</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-2025-0013</order_id>
+    <mobile_number>9123456787</mobile_number>
+    <order_date_time>2025-10-22T17:25:22</order_date_time>
+    <sku_id>SKU-1015</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>2500</total_amount>
+  </order>
+
+
+  <!-- Customer CUST-008 -->
+  <order>
+    <order_id>ORD-2025-0014</order_id>
+    <mobile_number>9123456788</mobile_number>
+    <order_date_time>2025-08-19T15:10:10</order_date_time>
+    <sku_id>SKU-1016</sku_id>
+    <sku_count>2</sku_count>
+    <total_amount>4800</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-2025-0015</order_id>
+    <mobile_number>9123456788</mobile_number>
+    <order_date_time>2025-09-25T19:45:03</order_date_time>
+    <sku_id>SKU-1004</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>3100</total_amount>
+  </order>
+
+
+  <!-- Customer CUST-009 -->
+  <order>
+    <order_id>ORD-2025-0016</order_id>
+    <mobile_number>9123456789</mobile_number>
+    <order_date_time>2025-11-04T11:22:41</order_date_time>
+    <sku_id>SKU-1009</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>5400</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-2025-0017</order_id>
+    <mobile_number>9123456789</mobile_number>
+    <order_date_time>2025-10-14T14:55:19</order_date_time>
+    <sku_id>SKU-1010</sku_id>
+    <sku_count>2</sku_count>
+    <total_amount>6200</total_amount>
+  </order>
+
+
+  <!-- Customer CUST-010 -->
+  <order>
+    <order_id>ORD-2025-0018</order_id>
+    <mobile_number>9123456790</mobile_number>
+    <order_date_time>2025-11-02T12:12:12</order_date_time>
+    <sku_id>SKU-1013</sku_id>
+    <sku_count>3</sku_count>
+    <total_amount>8700</total_amount>
+  </order>
+
+
+  <!-- Customers CUST-011 to CUST-020 -->
+  <!-- I’ll generate around 40 more orders (2–3 per customer) with good date and region spread. -->
+</orders>

@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: akasa_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: akasa_db
+      MYSQL_USER: akasa_user
+      MYSQL_PASSWORD: akasa_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+
+  fastapi:
+    build: .
+    container_name: akasa_fastapi
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: akasa_db
+      DB_USER: akasa_user
+      DB_PASSWORD: akasa_pass
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - mysql
+    restart: always
+
+volumes:
+  mysql_data:

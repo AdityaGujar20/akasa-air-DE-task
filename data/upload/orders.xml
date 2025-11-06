@@ -1,0 +1,210 @@
+<orders>
+
+  <!-- ---------- CUST-001 ---------- -->
+  <order>
+    <order_id>ORD-1001</order_id>
+    <mobile_number>9000010001</mobile_number>
+    <order_date_time>2025-07-14T09:45:11</order_date_time>
+    <sku_id>SKU-101</sku_id>
+    <sku_count>2</sku_count>
+    <total_amount>5400</total_amount>
+  </order>
+  <order>
+    <order_id>ORD-1001</order_id>
+    <mobile_number>9000010001</mobile_number>
+    <order_date_time>2025-07-14T09:45:11</order_date_time>
+    <sku_id>SKU-108</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>5400</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-1002</order_id>
+    <mobile_number>9000010001</mobile_number>
+    <order_date_time>2025-11-04T16:21:33</order_date_time>
+    <sku_id>SKU-201</sku_id>
+    <sku_count>3</sku_count>
+    <total_amount>7200</total_amount>
+  </order>
+
+
+  <!-- ---------- CUST-002 ---------- -->
+  <order>
+    <order_id>ORD-1003</order_id>
+    <mobile_number>9000010002</mobile_number>
+    <order_date_time>2025-10-18T19:12:45</order_date_time>
+    <sku_id>SKU-102</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>3100</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-1004</order_id>
+    <mobile_number>9000010002</mobile_number>
+    <order_date_time>2025-11-02T11:50:02</order_date_time>
+    <sku_id>SKU-205</sku_id>
+    <sku_count>2</sku_count>
+    <total_amount>6400</total_amount>
+  </order>
+
+
+  <!-- ---------- CUST-003 ---------- -->
+  <order>
+    <order_id>ORD-1005</order_id>
+    <mobile_number>9000010003</mobile_number>
+    <order_date_time>2025-10-29T13:35:09</order_date_time>
+    <sku_id>SKU-301</sku_id>
+    <sku_count>4</sku_count>
+    <total_amount>8800</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-1006</order_id>
+    <mobile_number>9000010003</mobile_number>
+    <order_date_time>2025-11-03T18:12:56</order_date_time>
+    <sku_id>SKU-112</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>2600</total_amount>
+  </order>
+
+
+  <!-- ---------- CUST-004 ---------- -->
+  <order>
+    <order_id>ORD-1007</order_id>
+    <mobile_number>9000010004</mobile_number>
+    <order_date_time>2025-10-30T10:15:44</order_date_time>
+    <sku_id>SKU-207</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>4500</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-1008</order_id>
+    <mobile_number>9000010004</mobile_number>
+    <order_date_time>2025-11-05T09:25:51</order_date_time>
+    <sku_id>SKU-401</sku_id>
+    <sku_count>2</sku_count>
+    <total_amount>7600</total_amount>
+  </order>
+
+
+  <!-- ---------- CUST-005 ---------- -->
+  <order>
+    <order_id>ORD-1009</order_id>
+    <mobile_number>9000010005</mobile_number>
+    <order_date_time>2025-08-19T08:11:12</order_date_time>
+    <sku_id>SKU-104</sku_id>
+    <sku_count>3</sku_count>
+    <total_amount>6900</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-1010</order_id>
+    <mobile_number>9000010005</mobile_number>
+    <order_date_time>2025-10-22T15:59:41</order_date_time>
+    <sku_id>SKU-403</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>3900</total_amount>
+  </order>
+
+
+  <!-- ---------- CUST-006 ---------- -->
+  <order>
+    <order_id>ORD-1011</order_id>
+    <mobile_number>9000010006</mobile_number>
+    <order_date_time>2025-10-21T09:44:33</order_date_time>
+    <sku_id>SKU-405</sku_id>
+    <sku_count>2</sku_count>
+    <total_amount>5600</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-1012</order_id>
+    <mobile_number>9000010006</mobile_number>
+    <order_date_time>2025-11-01T19:05:12</order_date_time>
+    <sku_id>SKU-221</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>3200</total_amount>
+  </order>
+
+
+  <!-- ---------- CUST-007 ---------- -->
+  <order>
+    <order_id>ORD-1013</order_id>
+    <mobile_number>9000010007</mobile_number>
+    <order_date_time>2025-10-26T17:40:09</order_date_time>
+    <sku_id>SKU-109</sku_id>
+    <sku_count>2</sku_count>
+    <total_amount>5000</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-1014</order_id>
+    <mobile_number>9000010007</mobile_number>
+    <order_date_time>2025-11-03T12:51:28</order_date_time>
+    <sku_id>SKU-118</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>2700</total_amount>
+  </order>
+
+
+  <!-- ---------- CUST-008 ---------- -->
+  <order>
+    <order_id>ORD-1015</order_id>
+    <mobile_number>9000010008</mobile_number>
+    <order_date_time>2025-10-19T11:43:55</order_date_time>
+    <sku_id>SKU-130</sku_id>
+    <sku_count>2</sku_count>
+    <total_amount>6200</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-1016</order_id>
+    <mobile_number>9000010008</mobile_number>
+    <order_date_time>2025-11-02T13:22:19</order_date_time>
+    <sku_id>SKU-232</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>3200</total_amount>
+  </order>
+
+
+  <!-- ---------- CUST-009 ---------- -->
+  <order>
+    <order_id>ORD-1017</order_id>
+    <mobile_number>9000010009</mobile_number>
+    <order_date_time>2025-10-25T14:30:44</order_date_time>
+    <sku_id>SKU-233</sku_id>
+    <sku_count>2</sku_count>
+    <total_amount>5800</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-1018</order_id>
+    <mobile_number>9000010009</mobile_number>
+    <order_date_time>2025-11-04T10:45:31</order_date_time>
+    <sku_id>SKU-125</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>3000</total_amount>
+  </order>
+
+
+  <!-- ---------- CUST-010 ---------- -->
+  <order>
+    <order_id>ORD-1019</order_id>
+    <mobile_number>9000010010</mobile_number>
+    <order_date_time>2025-10-16T17:33:12</order_date_time>
+    <sku_id>SKU-140</sku_id>
+    <sku_count>3</sku_count>
+    <total_amount>8100</total_amount>
+  </order>
+
+  <order>
+    <order_id>ORD-1020</order_id>
+    <mobile_number>9000010010</mobile_number>
+    <order_date_time>2025-11-05T09:21:09</order_date_time>
+    <sku_id>SKU-255</sku_id>
+    <sku_count>1</sku_count>
+    <total_amount>3500</total_amount>
+  </order>
+
+</orders>
